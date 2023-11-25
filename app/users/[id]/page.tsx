@@ -1,14 +1,12 @@
-import { notFound } from "next/navigation"
+import { notFound } from "next/navigation";
 
 interface Props {
-    params: { id: number }
+  params: { id: number };
 }
 
 const UserDetails = ({ params: { id } }: Props) => {
-    if (id > 10) notFound();
-    return (
-        <div>UserDetails{id} </div>
-    )
-}
+  if (id > 10) notFound();
+  return <div>UserDetails{id} </div>;
+};
 
-export default UserDetails
+export default UserDetails;

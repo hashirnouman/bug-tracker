@@ -1,21 +1,16 @@
-import { ReactNode } from "react"
+import { ReactNode } from "react";
 
 interface Props {
-    children: ReactNode
+  children: ReactNode;
 }
 
 const AdminLayout = ({ children }: Props) => {
-    return (
-        <div className="flex">
-            <aside className="bg-slate-200 p-5 mr-5">
-                Admin Sidbar
-            </aside>
-            <div>
+  return (
+    <div className="flex">
+      <aside className="bg-slate-200 p-5 mr-5">Admin Sidbar</aside>
+      <div>{children}</div>
+    </div>
+  );
+};
 
-                {children}
-            </div>
-        </div>
-    )
-}
-
-export default AdminLayout
+export default AdminLayout;

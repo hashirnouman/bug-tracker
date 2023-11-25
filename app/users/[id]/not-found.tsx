@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const UserNotFound = () => {
-    return (
-        <div>The requested user data not found</div>
-    )
-}
+  return <div>The requested user data not found</div>;
+};
 
-export default UserNotFound
+export default UserNotFound;
