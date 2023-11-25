@@ -6,8 +6,6 @@ interface Props {
 }
 
 const Users = async ({ searchParams: { sortOrder } }: Props) => {
-  console.log(sortOrder);
-
   return (
     <div className="p-[20px]">
       {/* <p>{new Date().toLocaleTimeString()}</p> */}
