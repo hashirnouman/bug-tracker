@@ -1,13 +1,13 @@
-import Link from "next/link"
-
+import Link from "next/link";
 
 const Navbar = () => {
-    return (
-        <nav className="bg-gray-400 flex gap-7">
-            <Link href="/">home</Link>
-            <Link href="/users">Users</Link>
-        </nav>
-    )
-}
+  return (
+    <nav className="bg-gray-400 flex space-x-3">
+      <Link href="/">home</Link>
+      <Link href="/users">Users</Link>
+      <Link href="/api/auth/signin" >Signin</Link>
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -1,12 +1,12 @@
-import React from 'react'
-import AddCart from './AddCart'
+import React from "react";
+import AddCart from "./AddCart";
 
 const Product = () => {
-    return (
-        <div>
-            <AddCart />
-        </div>
-    )
-}
+  return (
+    <div>
+      <AddCart />
+    </div>
+  );
+};
 
-export default Product
+export default Product;

@@ -1,43 +1,43 @@
 import { NextRequest, NextResponse } from "next/server";
-
+import schema from "./schema";
+import prisma from "@/prisma/client";
 // if we remove the request: NextRequest Next.js will cache the result to prevent this add request: NextRequest
-export function GET(request: NextRequest) {
-    return NextResponse.json([{ id: 1, name: "Hashir" }]);
+export async function GET(request: NextRequest) {
+  const users = await prisma.user.findMany();
+  return NextResponse.json(users);
 }
 
 export async function POST(request: NextRequest) {
-    const body = await request.json();
-    if (!body.name) {
-        return NextResponse.json(
-            {
-                error: "Name required",
-            },
-            { status: 400 }
-        );
-    }
-    return NextResponse.json({ id: body.id, name: body.name }, { status: 201 });
-}
+  const body = await request.json();
+  const validation = schema.safeParse(body);
+  if (!validation.success) {
+    return NextResponse.json(validation.error.errors, { status: 400 });
+  }
 
-export async function PUT(
-    request: NextRequest,
-    { params: { id } }: { params: { id: number } }
-) {
-    const body = await request.json();
-    if (!body.name) {
-        return NextResponse.json(
-            {
-                error: "Name required",
-                status: 400,
-            },
-            { status: 400 }
-        );
-    }
-    if (id > 10) {
-        return NextResponse.json(
-            {
-                error: "user not found",
-            },
-            { status: 404 }
-        );
-    }
+  /**
+   * write the below code like this is not safe becuase mallicious user can
+   * send any kind of a data specially in no sql database this approach is unsafe
+   *
+   *  prisma.user.create({data: body});
+   *
+   */
+  const user = await prisma.user.findUnique({
+    where: {
+      email: body.email,
+    },
+  });
+
+  if (user) {
+    return NextResponse.json(
+      { error: "A user with this email already exists" },
+      { status: 400 }
+    );
+  }
+  const newUser = await prisma.user.create({
+    data: {
+      name: body.name,
+      email: body.email,
+    },
+  });
+  return NextResponse.json(newUser, { status: 201 });
 }
