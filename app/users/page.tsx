@@ -1,6 +1,7 @@
 import React from "react";
 import UsersTable from "./UsersTable";
 import Link from "next/link";
+import { Metadata } from "next";
 interface Props {
   searchParams: { sortOrder: string };
 }
@@ -17,5 +18,14 @@ const Users = async ({ searchParams: { sortOrder } }: Props) => {
     </div>
   );
 };
+// export const metadata: Metadata = {
+//   title: "...",
+// };
 
+// export async function generateMetadata(): Promise<Metadata> {
+//   const product = await fetch("");
+//   return {
+//     title: "product",
+//   };
+// }
 export default Users;
